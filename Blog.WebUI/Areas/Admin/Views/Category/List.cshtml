@@ -1,0 +1,134 @@
+﻿@model List<CategoryListVM>
+
+<div class="container">
+
+
+    <div class="row">
+
+        <div class="col-sm-11">
+
+            <div class="text-center">
+
+                <h2 style="font-family:'Italic Outline Art';" class="text-secondary">KATEGORİLER</h2>
+            </div>
+
+
+            <div style="padding-top:50px">
+
+
+
+
+                <div class="float-end">
+                    <a asp-area="Admin" asp-controller="Category" asp-action="New" class="btn btn-link">
+
+                        <i class="bi bi-plus-circle-fill">
+                            Yeni Kategori
+                        </i>
+
+                    </a>
+                </div>
+
+
+                <table id="myTable" class="table table-bordered table-striped">
+
+                    <thead>
+
+                        <tr>
+
+                            <th>#</th>
+                            
+                            <th>Kategori Adı</th>
+                            <th>Açıklama</th>
+                            <th>Oluşturulma Tarih</th>
+                            <th></th>
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        @if (Model != null)
+                        {
+                            @for (int i = 0; i < Model.Count; i++)
+                            {
+
+                                <tr class="table">
+
+                                    <td>@(i + 1)</td>
+
+                                    
+
+
+
+                                    <td>@Model[i].Name</td>
+                                    
+
+
+                                    <td>
+                                        @if (Model[i].Description.Length > 10)
+                                        {
+
+                                            @Model[i].Description.Substring(0,9)
+                                        }
+                                        else
+                                        {
+                                            @Model[i].Description
+                                        }
+                                    </td>
+
+
+                                    <td>@Model[i].CreatedDate.ToShortDateString()</td>
+
+                                    <td>
+
+
+                                        
+
+                                        <a style="margin-left:3px" asp-area="Admin" asp-controller="Category" asp-action="New" asp-route-id="@Model[i].Id" class="btn btn-sm btn-primary" alt="Güncelle">
+                                            <i class="bi bi-pencil-fill">Güncelle</i>
+                                        </a>
+
+                                        <a asp-area="Admin" asp-controller="Category" asp-action="Delete" asp-route-id="@Model[i].Id" class="btn btn-sm btn-danger delete">
+                                            <i class="bi bi-trash3">Sil</i>
+                                        </a>
+
+
+                                    </td>
+
+
+                                </tr>
+
+                            }
+                        }
+                        else
+                        {
+                            <tr class="container">
+                                <td>Henüz Bir Kayıt Bulunamadı</td>
+                            </tr>
+                        }
+
+
+                    </tbody>
+
+
+
+
+                </table>
+
+                
+
+
+                <p>
+                    <span>Toplam : @ViewBag.CountCategory Kayıt Bulundu.</span>
+                </p>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+
+
+</div>

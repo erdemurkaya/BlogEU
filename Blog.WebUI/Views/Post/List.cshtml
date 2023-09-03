@@ -1,0 +1,40 @@
+﻿@model List<PostListVModel>
+
+<main id="main">
+    <section>
+        <div class="container">
+            <div class="row">
+
+                <div class="col-md-12" data-aos="fade-up">
+                    <h3 class="category-title">Haberler </h3>
+
+
+                    @foreach (var item in Model)
+                    {
+                        <div class="d-md-flex post-entry-2 half">
+                            <a asp-controller="Post" asp-action="Detail" asp-route-id="@item.Id" class="me-4 thumbnail">
+                                <img src="~/images/posts/@item.ImagePath" alt="" class="img-fluid">
+                            </a>
+                            <div>
+                                <div class="post-meta"><span class="date">Tarih :</span> <span class="mx-1">&bullet;</span> <span>@item.CreatedDate.ToShortDateString()</span></div>
+                                <h3><a href="single-post.html">@item.Title</a></h3>
+                                <p>@item.Content</p>
+                                <div class="d-flex align-items-center author">
+                                    <div class="photo"><img src="assets/img/person-2.jpg" alt="" class="img-fluid"></div>
+                                    <div class="name">
+                                        <h3 class="m-0 p-0">Erdem Urkaya</h3>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+
+
+                </div>
+
+
+
+            </div>
+        </div>
+    </section>
+</main>

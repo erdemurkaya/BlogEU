@@ -1,0 +1,285 @@
+﻿@model PostVModel
+
+
+<main id="main">
+
+    <!-- ======= Hero Slider Section ======= -->
+    <section id="hero-slider" class="hero-slider">
+        <div class="container-md" data-aos="fade-in">
+            <div class="row">
+                <div class="col-12">
+                    <div class="swiper sliderFeaturedPosts">
+                        <div class="swiper-wrapper">
+
+
+
+                            @foreach (var item in ViewBag.newsOrderTake)
+                            {
+                                <div class="swiper-slide">
+                                    <a asp-controller="News" asp-action="Detail" asp-route-id="" class="img-bg d-flex align-items-end" style="background-image: url('~/images/news/@item.ImagePath');">
+                                        <div class="img-bg-inner">
+                                            <h2>@item.Title</h2>
+
+
+                                            @if (item.Content.Lenght < 30)
+                                            {
+                                                <p>@item.Content</p>
+                                            }
+                                            else
+                                            {
+                                                <p>@item.Content.Substring(29)</p>
+                                            }
+
+                                            
+
+
+
+
+
+
+                                        </div>
+                                    </a>
+                                </div>
+                            }
+
+
+
+
+                        </div>
+                        <div class="custom-swiper-button-next">
+                            <span class="bi-chevron-right"></span>
+                        </div>
+                        <div class="custom-swiper-button-prev">
+                            <span class="bi-chevron-left"></span>
+                        </div>
+
+                        <div class="swiper-pagination"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section><!-- End Hero Slider Section -->
+    <!-- ======= Post Grid Section ======= -->
+    <section id="posts" class="posts">
+        <div class="container" data-aos="fade-up">
+
+            <div class="section-header d-flex justify-content-between align-items-center mb-5">
+                <h2>Yazılar</h2>
+                <div><a asp-controller="Post" asp-action="List" class="more">Tüm Yazılar</a></div>
+            </div>
+
+
+            <div class="row g-5">
+                <div class="col-lg-4">
+                    
+
+                    @if (Model != null)
+                    {
+                        <div class="post-entry-1 lg">
+                            <a asp-controller="News" asp-action="Detail" asp-route-id="Id"><img src="~/images/posts/@Model.ImagePath" alt="" class="img-fluid"></a>
+                            <div class="post-meta"><span class="date">Culture</span> <span class="mx-1">&bullet;</span> <span>@Model.CreatedDate</span></div>
+                            <h2><a href="single-post.html">@Model.Title</a></h2>
+                            <p class="mb-4 d-block">
+                                
+                                @if (Model.Content.Length < 30)
+                                {
+                                    @Model.Content
+                                }
+                                else
+                                {
+                                    @Model.Content.Substring(29)
+                                }
+
+                                </p>
+
+                            <div class="d-flex align-items-center author">
+                                <div class="photo">
+                                    <img src="~/images/posts/@Model.ImagePath" alt="" class="img-fluid">
+
+
+
+                                </div>
+                                <div class="name">
+                                    <h3 class="m-0 p-0">Erdem Urkaya</h3>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                    else
+                    {
+                        <p>Henüz Bir Paylaşım Yapılmadı.</p>
+                    }
+
+
+                </div>
+
+                <div class="col-lg-8">
+                    <div class="row g-5">
+                        <div class="col-lg-4 border-start custom-border">
+
+                            @foreach (var item in ViewBag.postOrderTake)
+                            {
+
+                                <div class="post-entry-1">
+                                    <a href="single-post.html"><img src="~/images/posts/@item.ImagePath" alt="" class="img-fluid"></a>
+                                    <div class="post-meta"><span class="date">Sport</span> <span class="mx-1">&bullet;</span> <span>@item.CreatedDate</span></div>
+                                    <h2><a >
+
+
+                                            @if (item.Content.Lenght < 30)
+                                            {
+                                                <p>@item.Content</p>
+                                            }
+                                            else
+                                            {
+                                                <p>@item.Content.Substring(29)</p>
+                                            }
+
+
+                                    </a></h2>
+                                </div>
+
+                            }
+
+
+
+
+                        </div>
+                        <div class="col-lg-4 border-start custom-border">
+                        </div>
+
+                        <!-- Trending Section -->
+                        <div class="col-lg-4">
+
+                            <div class="trending">
+                                <h3>Kategoriler</h3>
+                                <ul class="trending-post">
+
+                                    @foreach (var item in ViewBag.categoryOrderTake)
+                                    {
+                                        <li>
+                                            <a href="single-post.html">
+                                                <span class="number"></span>
+                                                <h3>@item.Description</h3>
+                                                <span class="author">@item.Name</span>
+                                            </a>
+                                        </li>
+                                    }
+
+
+
+
+
+
+
+                                </ul>
+                            </div>
+
+                        </div> <!-- End Trending Section -->
+                    </div>
+                </div>
+
+            </div> <!-- End .row -->
+        </div>
+    </section> <!-- End Post Grid Section -->
+    <!-- ======= Culture Category Section ======= -->
+
+
+
+    <section class="category-section">
+        <div class="container" data-aos="fade-up">
+
+            <div class="section-header d-flex justify-content-between align-items-center mb-5">
+                <h2>Haberler</h2>
+                <div><a asp-controller="News" asp-action="List" class="more">Tüm Haberler</a></div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-9">
+
+
+
+
+
+                    <div class="d-lg-flex post-entry-2">
+
+
+                        
+
+                        @if (ViewBag.lastNews != null)
+                        {
+                            <div>
+                                <div class="post-meta"><span class="date">Culture</span> <span class="mx-1">&bullet;</span> <span>Jul 5th '22</span></div>
+                                <h3><a href="single-post.html">@ViewBag.lastNews.Title</a></h3>
+                                <p>
+
+                                    @if (ViewBag.lastNews.Content.Lenght<30)
+                                    {
+                                        @ViewBag.lastNews.Content
+                                    }
+                                    else
+                                    {
+                                        @ViewBag.lastNews.Content.Substring(29)
+                                    }
+
+                                </p>
+                                <div class="d-flex align-items-center author">
+                                    <div class="photo"><img src="assets/img/person-2.jpg" alt="" class="img-fluid"></div>
+                                    <div class="name">
+                                        <h3 class="m-0 p-0">Erdem Urkaya</h3>
+
+
+
+
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                        else
+                        {
+                            <p>Henüz Bir Paylaşım Yapılmadı.</p>
+                        }
+
+
+                        
+
+                        
+
+
+
+
+                    </div>
+
+
+                </div>
+
+                <div class="col-md-3">
+
+                    @foreach (var item in ViewBag.newsOrderTake)
+                    {
+                        <div class="post-entry-1 border-bottom">
+                            <div class="post-meta">
+                                <span class="date">Culture</span> <span class="mx-1">&bullet;</span> <span>@item.Title</span>
+
+                                <a asp-controller="News" asp-action="Detail" asp-route-id="@item.Id">devamı</a>
+
+                            </div>
+                            <h2 class="mb-2"><a href="single-post.html">@item.Content</a></h2>
+                            <span class="author mb-3 d-block">Erdem Urkaya</span>
+                        </div>
+                    }
+
+
+
+
+
+
+
+                </div>
+            </div>
+        </div>
+    </section><!-- End Culture Category Section -->
+    <!-- ======= Business Category Section ======= -->
+
+
+</main>

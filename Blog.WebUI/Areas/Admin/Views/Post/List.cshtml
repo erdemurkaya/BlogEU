@@ -1,0 +1,143 @@
+﻿@model List<PostListVM>
+
+<div class="container">
+
+
+    <div class="row">
+
+        <div class="col-sm-11">
+
+            <div class="text-center">
+
+                <h2 style="font-family:'Italic Outline Art';" class="text-secondary">YAZILAR</h2>
+            </div>
+
+
+            <div style="padding-top:50px">
+
+
+
+
+
+                <div class="float-end">
+                    <a asp-area="Admin" asp-controller="Post" asp-action="New" class="btn btn-link">
+
+                        <i class="bi bi-plus-circle-fill">
+                            Yeni Yazı
+                        </i>
+
+                    </a>
+                </div>
+
+
+                <table id="myTable" class="table table-bordered table-striped">
+
+                    <thead>
+
+                        <tr>
+
+                            <th>#</th>                            
+                            <th>Başlık</th>
+                            <th>İçerik</th>
+                            <th>Oluşturulma Tarih</th>
+
+                            <th></th>
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        @if (Model != null)
+                        {
+                            @for (int i = 0; i < Model.Count; i++)
+                            {
+
+                                <tr class="table">
+
+
+
+                                    <td>
+
+                                        @if (string.IsNullOrWhiteSpace(Model[i].ImagePath))
+                                        {
+                                            <img src="~/images/image-preview-icon-picture-placeholder-vector-31284806.jpg" style="width:100px; height:100px" />
+                                        }
+                                        else
+                                        {
+                                            <a style="width:80px;height:80px" href="~/images/news/@Model[i].ImagePath" data-lightbox="@Model[i].Id" data-title="@Model[i].Title">
+
+                                                <img src="~/images/posts/@Model[i].ImagePath" alt="@Model[i].Title" style="width:50px;height:50px" />
+
+                                            </a>
+                                        }
+
+                                    </td>
+
+
+
+                                    <td>@Model[i].Title</td>
+                                    <td class="mt-4">
+
+                                        @if (Model[i].Content.Length > 10)
+                                        {
+                                            @Model[i].Content.Substring(0, 9)
+                                        }
+                                        else
+                                        {
+                                            @Model[i].Content
+                                        }
+
+                                    </td>
+
+                                    <td>@Model[i].CreatedDate</td>
+
+                                    <td>
+
+
+
+
+                                        <a style="margin-left:3px" asp-area="Admin" asp-controller="Post" asp-action="New" asp-route-id="@Model[i].Id" class="btn btn-sm btn-primary" alt="Güncelle">
+                                            <i class="bi bi-pencil-fill">Güncelle</i>
+                                        </a>
+
+                                        <a asp-area="Admin" asp-controller="Post" asp-action="Delete" asp-route-id="@Model[i].Id" style="margin-left:3px" class="btn btn-sm btn-danger">
+
+                                            <i class="bi bi-trash-fill">Sil</i>
+                                        </a>
+
+
+                                    </td>
+
+
+                                </tr>
+
+                            }
+                        }
+                        else
+                        {
+                            <tr class="container">
+                                <td>Henüz Bir Kayıt Bulunamadı</td>
+                            </tr>
+                        }
+
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+
+        </div>
+
+
+        <div>
+            <p class="text-secondary">Toplam : @ViewBag.postCount Kayıt Bulundu.</p>
+        </div>
+
+    </div>
+
+
+
+</div>
